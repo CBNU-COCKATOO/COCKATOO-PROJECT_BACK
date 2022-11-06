@@ -35,7 +35,7 @@ exports.create = (req, res) => {
             });
         } //   ;
         else
-        res.status(200).send("성공적으로 사용자가 생성되었습니다.");
+        res.status(200).send("Successfully Created.");
 
     })
 };
