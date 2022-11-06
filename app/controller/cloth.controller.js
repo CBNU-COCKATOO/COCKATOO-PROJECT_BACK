@@ -27,4 +27,89 @@ exports.create = (req,res)=>{
         };
     }) 
 };
+// 전체 조회 
+exports.findAll = (req,res)=>{
+    Cloth.getAll((err, data) => {
+        if (err)
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving clothes."
+          });
+        else res.send(data);
+      });
+};
 
+// id로 조회
+exports.findOne = (req,res)=>{
+
+    Cloth.findByID(req.params.clothId, (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found Cloth with clo_id ${req.params.clothId}.`
+            });
+          } else {
+            res.status(500).send({
+              message: "Error retrieving Cloth with clo_id " + req.params.clothId
+            });
+          }
+        } else res.send(data);
+      });
+};
+
+// id로 갱신
+exports.update = (req,res)=>{
+    // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  Cloth.updateByID(
+    req.params.clothId,
+    new Cloth(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Cloth with clo_id ${req.params.clothId}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating Cloth with clo_id " + req.params.clothId
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
+
+// id로 삭제
+exports.delete = (req,res)=>{
+    Cloth.remove(req.params.clothId, (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found Cloth with clo_id ${req.params.clothId}.`
+            });
+          } else {
+            res.status(500).send({
+              message: "Could not delete Cloth with clo_id " + req.params.clothId
+            });
+          }
+        } else res.send({ message: `Cloth was deleted successfully!` });
+      });
+};
+
+// 전체 삭제
+exports.deleteAll = (req,res)=>{
+    Cloth.removeAll((err, data) => {
+        if (err)
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while removing all clothes."
+          });
+        else res.send({ message: `All Clothes were deleted successfully!` });
+      });
+};
