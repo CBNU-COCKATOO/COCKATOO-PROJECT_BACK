@@ -1,7 +1,20 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
+
+const whitelist = ["http://localhost:8080"];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not Allowed Origin!"));
+      }
+    },
+  };
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
