@@ -35,7 +35,7 @@ exports.create = (req, res) => {
             });
         } //   ;
         else
-        res.status(200).send("Successfully Created.");
+        res.status(200).json({"Success":"Successfully Created."});
 
     })
 };
@@ -43,8 +43,8 @@ exports.checkid = (req, res) => {
     User.IDCheck(req.params.userId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
-                res.status(200).send({  
-                    message: "사용 가능한 아이디입니다." //+ req.params.userId
+                res.status(200).json({  
+                    message: {"OK":"OK! CREATE"} //+ req.params.userId
                 });
             } else {
                 res.status(500).send({
