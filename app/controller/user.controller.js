@@ -35,7 +35,7 @@ exports.create = (req, res) => {
             });
         } //   ;
         else
-        res.status(404).send('성공적으로 사용자가 생성되었습니다.');
+        res.status(200).send('성공적으로 사용자가 생성되었습니다.');
 
     })
 };
@@ -43,7 +43,7 @@ exports.checkid = (req, res) => {
     User.IDCheck(req.params.userId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
-                res.status(404).send({  
+                res.status(200).send({  
                     message: '사용 가능한 아이디입니다.' //+ req.params.userId
                 });
             } else {
