@@ -35,16 +35,17 @@ exports.create = (req, res) => {
             });
         } //   ;
         else
-        res.status(200).json({"Success":"Successfully Created."});
+        res.status(200).json({message:"Successfully Created."});
 
     })
 };
+//아이디 중복 확인
 exports.checkid = (req, res) => {
     User.IDCheck(req.params.userId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(200).json({  
-                    message: {"OK":"OK! CREATE"} //+ req.params.userId
+                    message: "You can use this ID"//+ req.params.userId
                 });
             } else {
                 res.status(500).send({

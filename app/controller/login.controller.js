@@ -1,23 +1,32 @@
-/*
-const sql = require("./db.js");
+//const { request } = require("express");
+const sql = require("../models/db.js");
 
-exports.loginPostMid = (req, res) => {
-    const { id, pw } = req.body;
-    db.query(`SELECT * FROM user WHERE id="${id}"`, (error, result) => {
+exports.login = (req, res) => {
+    const u_id = req.params.userId;
+    const u_pw = req.params.userPw;
+
+    sql.query('SELECT * FROM USER WHERE u_id = ? AND u_pw =?', [u_id, u_pw],(error, result) => {
       if (error) return console.log(error);
   
       if (result.length) {
         console.log(result);
-        if (result[0].pw === pw) {
-          console.log('login 성공');
-        } else {
-          console.log('login 실패');
-        }
-        res.redirect('/');
+        //session에 로그인 했음 저장
+        //request.session.loggedin =true;
+        //request.session.username = u_id;
+        res.json({message:'Successfully LoggedIn'});
+        //res.redirect('/');
+        //res.end();
+
       } else {
-        console.log('login 실패');
-        res.redirect('/');
+        console.log({message:'Failed LogIn'});
+        res.json({message:'Failed LogIn'});
+        //res.redirect('/');
+        //res.end();
       }
     });
-  };
-  */
+};
+
+exports.logout = (req, res) => {
+    //request.session.loggedin =false;
+    res.json({"Logout":"Successfully Log out"});
+};
