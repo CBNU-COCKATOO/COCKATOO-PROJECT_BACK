@@ -17,7 +17,9 @@ const corsOptions = {
     },
   };
 
-app.use(cors(corsOptions));
+//보안 취약하지만 그냥 모든 주소를 허용 하는 걸로 오류 확인 
+app.use(cors());
+//app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
