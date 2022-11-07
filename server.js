@@ -11,6 +11,7 @@ const corsOptions = {
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
+        res.send(err);
         callback(new Error("Not Allowed Origin!"));
       }
     },
