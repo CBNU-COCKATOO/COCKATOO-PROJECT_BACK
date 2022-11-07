@@ -14,7 +14,9 @@ exports.create = (req,res)=>{
         clo_size: req.body.clo_size,
         clo_style: req.body.clo_style,
         clo_image: '/image/'+req.file.filename,
-        clo_des: req.body.clo_des
+        clo_des: req.body.clo_des,
+        clo_type: req.body.clo_type,
+        clo_u_id: req.body.clo_u_id
     });
 
     // 데이터베이스에 저장
@@ -39,22 +41,87 @@ exports.findAll = (req,res)=>{
       });
 };
 
-// id로 조회
+// user id로 조회 -> 사용자 전체 옷 조회
 exports.findOne = (req,res)=>{
+  Cloth.findByID(
+    req.params.userId,
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+          });
+        }
+      } else res.send(data);
+    });
+};
 
-    Cloth.findByID(req.params.clothId, (err, data) => {
-        if (err) {
-          if (err.kind === "not_found") {
-            res.status(404).send({
-              message: `Not found Cloth with clo_id ${req.params.clothId}.`
-            });
-          } else {
-            res.status(500).send({
-              message: "Error retrieving Cloth with clo_id " + req.params.clothId
-            });
-          }
-        } else res.send(data);
-      });
+exports.outerfind = (req, res) => {
+  Cloth.findOuter(req.params.userId, (err,data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+        });
+      }
+    } else res.send(data);
+  });  
+};
+
+exports.topfind = (req, res) => {
+  Cloth.findTop(req.params.userId, (err,data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+        });
+      }
+    } else res.send(data);
+  });  
+};
+
+exports.bottomfind = (req, res) => {
+  Cloth.findBottom(req.params.userId, (err,data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+        });
+      }
+    } else res.send(data);
+  });  
+};
+
+exports.shoesfind = (req, res) => {
+  Cloth.findShoes(req.params.userId, (err,data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+        });
+      }
+    } else res.send(data);
+  });  
 };
 
 // id로 갱신

@@ -8,6 +8,8 @@ const Cloth = function(cloth){
     this.clo_style=cloth.clo_style;
     this.clo_image=cloth.clo_image;
     this.clo_des=cloth.clo_des;
+    this.clo_type = cloth.clo_type;
+    this.clo_u_id = cloth.clo_u_id;
 };
 
 // customer 튜플 추가 
@@ -24,9 +26,9 @@ Cloth.create = (newCloth, result)=>{
     });
 };
 
-// cloth id로 조회
+// user id로 조회
 Cloth.findByID = (clothId, result)=>{
-    sql.query('SELECT * FROM clothes WHERE clo_id = ?',clothId, (err, res)=>{
+    sql.query('SELECT * FROM clothes WHERE clo_u_id = ?',clothId, (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -34,8 +36,92 @@ Cloth.findByID = (clothId, result)=>{
         }
 
         if(res.length){
-            console.log("found cloth: ", res[0]);
-            result(null, res[0]);
+            console.log("found cloth: ", res);
+            result(null, res);
+            return;
+        }
+
+        // 결과가 없을 시 
+        result({kind: "not_found"}, null);
+    });
+};
+
+// user id로 outer 조회
+Cloth.findOuter = (userId, result)=>{
+    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "outer"', userId, (err, res)=>{
+        console.log("res: ", res);
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if(res.length){
+            console.log("found cloth: ", res);
+            result(null, res);
+            return;
+        }
+
+        // 결과가 없을 시 
+        result({kind: "not_found"}, null);
+    });
+};
+
+// user id로 top 조회
+Cloth.findTop = (userId, result)=>{
+    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "top"', userId, (err, res)=>{
+        console.log("res: ", res);
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if(res.length){
+            console.log("found cloth: ", res);
+            result(null, res);
+            return;
+        }
+
+        // 결과가 없을 시 
+        result({kind: "not_found"}, null);
+    });
+};
+
+// user id로 bottom 조회
+Cloth.findBottom = (userId, result)=>{
+    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "bottom"', userId, (err, res)=>{
+        console.log("res: ", res);
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if(res.length){
+            console.log("found cloth: ", res);
+            result(null, res);
+            return;
+        }
+
+        // 결과가 없을 시 
+        result({kind: "not_found"}, null);
+    });
+};
+
+// user id로 shoes 조회
+Cloth.findShoes = (userId, result)=>{
+    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "shoes"', userId, (err, res)=>{
+        console.log("res: ", res);
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if(res.length){
+            console.log("found cloth: ", res);
+            result(null, res);
             return;
         }
 

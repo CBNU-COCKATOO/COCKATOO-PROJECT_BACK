@@ -8,11 +8,23 @@ module.exports=app=>{
 
     app.post("/clothes", upload.single('clo_image'), clothes.create);
 
+    //user id로 outer 값 조회
+    app.get("/findouter/:userId",clothes.outerfind);
+
+    //user id로 top 값 조회
+    app.get("/findtop/:userId",clothes.topfind);
+
+    //user id로 bottom 값 조회
+    app.get("/findbottom/:userId",clothes.bottomfind);
+
+    //user id로 shoes 값 조회
+    app.get("/findshoes/:userId",clothes.shoesfind);
+
     // 전체 조회 
     app.get("/clothes", clothes.findAll);
 
-    // id로 조회
-    app.get("/clothes/:clothId", clothes.findOne);
+    // user id로 옷 전체 조회
+    app.get("/clothes/:userId", clothes.findOne);
 
     // id로 수정
     app.put("/clothes/:clothId", clothes.update);
