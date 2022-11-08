@@ -43,12 +43,12 @@ exports.create = (req, res) => {
 exports.checkid = (req, res) => {
     User.IDCheck(req.params.userId, (err, data) => {
         if (err) {
-            if (err.kind === "not_found") {
+            if (err.kind == "not_found") {
                 res.status(200).json({  
                     message: "You can use this ID"//+ req.params.userId
                 });
             } else {
-                res.status(500).send({
+                res.status(500).json({
                     message: "Error retrieving User with id " + req.params.userId
                 });
             }
