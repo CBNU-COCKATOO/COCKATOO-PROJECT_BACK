@@ -46,7 +46,7 @@ User.IDCheck = (userId, result) => {
 
         if (res.length) {
             console.log("검색 아이디:", userId);
-            result(null, "이미 있는 아이디입니다.");
+            result(null, {message: "Can't use this ID"});
             return;
         }
 
