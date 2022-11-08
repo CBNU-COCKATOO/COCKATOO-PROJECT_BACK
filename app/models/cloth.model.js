@@ -12,7 +12,7 @@ const Cloth = function(cloth){
     this.clo_u_id = cloth.clo_u_id;
 };
 
-// customer 튜플 추가 
+// cloth 튜플 추가 
 Cloth.create = (newCloth, result)=>{
     sql.query("INSERT INTO clothes SET ?", newCloth, (err, res)=>{
         if(err){

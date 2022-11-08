@@ -21,12 +21,12 @@ exports.create = (req,res)=>{
 
     // 데이터베이스에 저장
     Cloth.create(cloth, (err, data) =>{
-        if(err){
+        if(err)
             res.status(500).send({
                 message:
                 err.message || "Some error occured while creating th Cloth."
             });
-        };
+        else res.send(data);
     }) 
 };
 // 전체 조회 
