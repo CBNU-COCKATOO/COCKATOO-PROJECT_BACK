@@ -45,7 +45,7 @@ exports.checkid = (req, res) => {
         if (err) {
             if (err.kind == "not_found") {
                 res.status(200).json({  
-                    message: "You can use this ID"//+ req.params.userId
+                    message: "사용할 수 있는 아이디입니다."//+ req.params.userId
                 });
             } else {
                 res.status(500).json({
