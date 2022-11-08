@@ -7,7 +7,6 @@ const User = function (user) {
     this.u_pw = user.u_pw;
     this.u_name = user.u_name;
     this.u_image = user.u_image;
-    this.u_age = user.u_age;
     this.u_email = user.u_email;
     this.u_height = user.u_height;
     this.u_weight = user.u_weight;
@@ -93,9 +92,9 @@ User.getAll = result => {
 
 // user id�� ����
 User.updateByID = (id, customer, result) => {
-    sql.query('UPDATE USER SET u_pw =?, u_name =?, u_image=?, u_age =?, u_email = ?, u_agree=?, u_height = ?, u_weight = ?, u_style=?, WHERE id = ? ',
+    sql.query('UPDATE USER SET u_pw =?, u_name =?, u_image=?, u_email = ?, u_agree=?, u_height = ?, u_weight = ?, u_style=?, WHERE id = ? ',
     //사이트 확인해서 변수명, 개수 수정하기 
-        [user.password, user.username, user.image, user.age, user.phonenumber, user.email, user.height, user.weight, user.id], (err, res) => {
+        [user.password, user.username, user.image,user.phonenumber, user.email, user.height, user.weight, user.id], (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);

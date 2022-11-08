@@ -13,7 +13,6 @@ exports.create = (req, res) => {
         u_pw: req.body.u_pw,
         u_name: req.body.u_name,
         u_image: req.body.u_image,
-        u_age: req.body.u_age,
         u_email: req.body.u_email,
         u_height: req.body.u_height,
         u_weight: req.body.u_weight,
