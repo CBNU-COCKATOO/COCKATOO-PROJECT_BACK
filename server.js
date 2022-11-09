@@ -24,7 +24,7 @@ app.use(express.json({ limit : "10mb" }));
 app.use(express.urlencoded({ limit:"10mb", extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use('/image', express.static('./upload'));
+app.use('/image', express.static('upload'));
 app.get("/", (req, res)=>{
     res.json({message: "Hello World!"});
 });
