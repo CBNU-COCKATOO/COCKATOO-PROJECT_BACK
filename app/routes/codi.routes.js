@@ -14,4 +14,14 @@ module.exports=app=>{
     //user id로 전체 코디 조회
     app.get("/codi/:userId", codi.findOne);
 
+    // id로 수정
+    app.put("/codi/:codiId", upload.single('codi_image'), codi.update);
+    
+    // id로 삭제
+    app.delete("/codi/:codiId", codi.delete);
+    
+    // 전체 삭제
+    app.delete("/codi", codi.deleteAll);
+    
+
 }
