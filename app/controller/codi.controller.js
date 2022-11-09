@@ -38,7 +38,7 @@ exports.findAll = (req,res)=>{
         else res.send(data);
     });
 };
-
+//사용자 아이디로 조회
 exports.findOne = (req,res)=>{
     Codi.findByID(
         req.params.userId,
@@ -55,4 +55,61 @@ exports.findOne = (req,res)=>{
                 }
             } else res.send(data);
         });
+};
+
+// codi id로 갱신
+exports.update = (req,res)=>{
+    // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  Codi.updateByID(
+    req.params.codiId,
+    new Codi(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Codi with codi_id ${req.params.codiId}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating Codi with codi_id " + req.params.codiId
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
+
+// id로 삭제
+exports.delete = (req,res)=>{
+    Codi.remove(req.params.codiId, (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found Codi with codi_id ${req.params.codiId}.`
+            });
+          } else {
+            res.status(500).send({
+              message: "Could not delete Codi with codi_id " + req.params.codiId
+            });
+          }
+        } else res.send({ message: `Codi was deleted successfully!` });
+      });
+};
+
+// 전체 삭제
+exports.deleteAll = (req,res)=>{
+    Codi.removeAll((err, data) => {
+        if (err)
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while removing all codies."
+          });
+        else res.send({ message: `All Codies were deleted successfully!` });
+      });
 };

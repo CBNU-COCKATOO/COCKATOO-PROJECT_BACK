@@ -185,7 +185,7 @@ Cloth.remove = (clo_id, result)=>{
     });
 };
 
-// customer 전체 삭제
+// cloth 전체 삭제
 Cloth.removeAll = result =>{
     sql.query('DELETE FROM clothes',(err, res)=>{
         if(err){
