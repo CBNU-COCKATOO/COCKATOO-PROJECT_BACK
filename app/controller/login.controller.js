@@ -13,13 +13,13 @@ exports.login = (req, res) => {
         //session에 로그인 했음 저장
         //request.session.loggedin =true;
         //request.session.username = u_id;
-        res.json({message:'Successfully LoggedIn'});
+        res.json({message:"로그인 성공"});
         //res.redirect('/');
         //res.end();
 
       } else {
-        console.log({message:'Failed LogIn'});
-        res.json({message:'Failed LogIn'});
+        console.log({message:"로그인 실패"});
+        res.json({message:"로그인 실패"});
         //res.redirect('/');
         //res.end();
       }
