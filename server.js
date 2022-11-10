@@ -34,6 +34,7 @@ require("./app/routes/user.routes.js")(app);
 require("./app/routes/login.routes.js")(app);
 require("./app/routes/codi.routes.js")(app);
 require("./app/routes/image.routes.js")(app);
+require("./app/routes/closet.routes.js")(app);
 
 // 포트넘버 설정
 app.listen(3000, ()=>{
