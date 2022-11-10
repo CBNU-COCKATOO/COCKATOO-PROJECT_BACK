@@ -16,22 +16,18 @@ exports.findByID = (req, res) =>{
     const sql6 = 'SELECT * FROM clothes WHERE u_id = ? AND clo_type = "shoes";'; // 신발 목록
     const sql6s = sql.format(sql6, u_id);
 
-    sql.query(sql1s+sql2s+sql3s+sql4s+sql5s+sql6s, (err, result)=>{
+    sql.query(sql1s+sql2s+sql3s+sql4s+sql5s+sql6s, (err, data)=>{
         if(err){
-            console.log(err);
-        }
-
-        if(res.length){
-            const User = results[0];
-            const Codi = results[1];
-            const Outer = results[2];
-            const Top= results[3];
-            const Bottom= results[4];
-            const Shoes= results[5];
-            console.log(result);
-            res.send({
-                data : {User, Codi, Outer, Top, Bottom, Shoes}});
-        }
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                  message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+                });
+              } else {
+                res.status(500).send({
+                  message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+                });
+              }
+            } else res.send(data);
 
     });
 
