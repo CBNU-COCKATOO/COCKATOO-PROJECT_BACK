@@ -92,6 +92,27 @@ User.findByID = (userId, result) => {
     });
 };
 
+User.findMypage = (userId, result) => {
+    
+    sql.query('SELECT u_name, u_image, u_height, u_weight, u_mainst FROM USER WHERE u_id = ?', userId, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("검색 아이디:", userId);
+            console.log("found user: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+
+        // ����� ���� �� 
+        result({ kind: "not_found" }, null);
+    });
+};
+
 // user ��ü ��ȸ
 User.getAll = result => {
     sql.query('SELECT * FROM USER', (err, res) => {

@@ -101,6 +101,22 @@ exports.findOne = (req, res) => {
     });
 };
 
+exports.Mypage = (req, res)=>{
+    User.findMypage(req.params.userId, (err, data) => {
+        if (err) {
+            if (err.kind == "not_found") {
+                res.status(404).send({  
+                    message: 'Not found user with id '+ req.params.userId
+                });
+            } else {
+                res.status(500).json({
+                    message: "Error retrieving User with id " + req.params.userId
+                });
+            }
+        } else res.json(data);
+    });
+};
+
 // id�� ����
 exports.update = (req, res) => {
     // Validate Request

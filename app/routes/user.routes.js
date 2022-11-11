@@ -11,6 +11,8 @@ module.exports = app => {
 
     // id�� ��ȸ
     app.get("/user/:userId", user.findOne);
+    //아이디로 자기 마이페이지 설정 가져오기
+    app.get("/mypage/:userId", user.Mypage);
 
     // id�� ����
     app.put("/user/:userId", user.update);
