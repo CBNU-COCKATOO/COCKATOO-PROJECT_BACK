@@ -14,14 +14,9 @@ exports.login = (req, res) => {
         //request.session.loggedin =true;
         //request.session.username = u_id;
         res.json({message:"로그인 성공"});
-        //res.redirect('/');
-        //res.end();
-
       } else {
         console.log({message:"로그인 실패"});
         res.json({message:"로그인 실패"});
-        //res.redirect('/');
-        //res.end();
       }
     });
 };
