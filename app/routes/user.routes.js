@@ -5,7 +5,7 @@ module.exports = app => {
     app.post("/user", user.create);
     //아이디 중복 확인
     app.get("/idcheck/:userId",user.checkid);
-
+    app.get("/pwcheck/:userId", user.checkpw);
     // ��ü ��ȸ 
     app.get("/user", user.findAll);
 

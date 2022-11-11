@@ -53,6 +53,22 @@ User.IDCheck = (userId, result) => {
         result({ kind: "not_found" }, null);
     });
 };
+User.PWCheck = (userId, userPw, result) => {
+    sql.query('SELECT * FROM USER WHERE u_id = ? AND u_pw =?', [userId, userPw], (err, res) => {
+        console.log("res: ", res);
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("검색 아이디:", userId);
+            result(null, {message: "인증 성공"});
+            return;
+        }else result({ kind: "not_found" }, null);
+    });
+};
 
 // user id�� ��ȸ
 User.findByID = (userId, result) => {

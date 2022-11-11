@@ -55,6 +55,22 @@ exports.checkid = (req, res) => {
     });
 };
 
+exports.checkpw = (req, res) => {
+    User.PWCheck(req.params.userId, req.body.u_pw, (err, data) => {
+        if (err) {
+            if (err.kind == "not_found") {
+                res.status(200).json({  
+                    message: "비밀번호 인증에 실패했습니다."//+ req.params.userId
+                });
+            } else {
+                res.status(500).json({
+                    message: "비밀번호 인증에 성공했습니다. 아이디:" + req.params.userId
+                });
+            }
+        } else res.status(500).json({message:"비밀번호 인증에 성공했습니다."});
+    });
+};
+
 // ��ü ��ȸ 
 exports.findAll = (req, res) => {
     User.getAll((err, data) => {
