@@ -67,7 +67,7 @@ exports.checkpw = (req, res) => {
                     message: "비밀번호 인증에 성공했습니다. 아이디:" + req.params.userId
                 });
             }
-        } else res.status(500).json({message:"비밀번호 인증에 성공했습니다."});
+        } else res.status(200).json({message:"비밀번호 인증에 성공했습니다."});
     });
 };
 
