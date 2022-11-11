@@ -33,7 +33,7 @@ module.exports = app =>{
     app.post('/imageUpload', upload.single('file'), async (req, res) => {
         try{
             console.log(req.file.location);
-            res.status(200).json({ location: req.file.location });
+            res.status(200).json({ location: `${req.file.location}`});
         }catch(err){
             console.error(err);
             next(err)
