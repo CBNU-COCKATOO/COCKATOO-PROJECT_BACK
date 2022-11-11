@@ -91,10 +91,9 @@ User.getAll = result => {
 };
 
 // user id�� ����
-User.updateByID = (id, customer, result) => {
-    sql.query('UPDATE USER SET u_pw =?, u_name =?, u_image=?, u_email = ?, u_agree=?, u_height = ?, u_weight = ?, u_style=?, WHERE id = ? ',
-    //사이트 확인해서 변수명, 개수 수정하기 
-        [user.password, user.username, user.image,user.phonenumber, user.email, user.height, user.weight, user.id], (err, res) => {
+User.updateByID = (userId, user, result) => {
+    sql.query('UPDATE USER SET u_name =?, u_image=?, u_email = ? WHERE u_id = ? ',
+    [user.u_name, user.u_image, user.u_email, userId], (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -107,14 +106,52 @@ User.updateByID = (id, customer, result) => {
                 return;
             }
 
-            console.log("update customer: ", { id: id, ...customer });
-            result(null, { id: id, ...customer });
+            console.log("update user: ", { id: userId, ...user });
+            result(null, { id: userId, ...user });
+        });
+};
+User.pw_update = (userId, userPw, result) => {
+    sql.query('UPDATE USER SET u_pw =? WHERE u_id = ? ',
+    [userPw, userId], (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                // id ����� ���� �� 
+                result({ kind: "not_found" }, null);
+                return;
+            }
+
+            console.log("update user: ", { id: userId, userPw });
+            result(null, { id: userId, userPw });
+        });
+};
+User.st_update = (userId, user, result) => {
+    sql.query('UPDATE USER SET u_height =?, u_weight = ?, u_mainst = ?, u_subst = ? WHERE u_id = ? ',
+    [user.u_height, user.u_weight, user.u_mainst, user.u_subst, userId], (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                // id ����� ���� �� 
+                result({ kind: "not_found" }, null);
+                return;
+            }
+
+            console.log("update user: ", { id: userId, ...user });
+            result(null, { id: userId, ...user });
         });
 };
 
 // user id�� ����
-User.remove = (id, result) => {
-    sql.query('DELETE FROM USER WHERE u_id = ?', id, (err, res) => {
+User.remove = (userId, result) => {
+    sql.query('DELETE FROM USER WHERE u_id = ?', userId, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -127,7 +164,7 @@ User.remove = (id, result) => {
             return;
         }
 
-        console.log("deleted customer with u_id: ", id);
+        console.log("deleted customer with u_id: ", userId);
         result(null, res);
     });
 };

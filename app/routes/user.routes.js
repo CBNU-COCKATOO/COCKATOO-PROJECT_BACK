@@ -14,7 +14,8 @@ module.exports = app => {
 
     // id�� ����
     app.put("/user/:userId", user.update);
-
+    app.put("/user/pwchange/:userId", user.PWupdate);
+    app.put("/user/stchange/:userId", user.stUpdate);
     // id�� ����
     app.delete("/user/:userId", user.delete);
 

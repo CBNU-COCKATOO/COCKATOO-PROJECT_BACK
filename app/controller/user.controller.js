@@ -34,7 +34,7 @@ exports.create = (req, res) => {
             });
         } //   ;
         else
-        res.status(200).json({message:"Successfully Created."});
+        res.status(200).json({message:"회원가입 성공"});
 
     })
 };
@@ -48,10 +48,10 @@ exports.checkid = (req, res) => {
                 });
             } else {
                 res.status(500).json({
-                    message: "Error retrieving User with id " + req.params.userId
+                    message: "사용할 수 없는 아이디입니다: " + req.params.userId
                 });
             }
-        } else res.send(data);
+        } else res.status(500).json({message:"사용할 수 없는 아이디입니다.:"+req.params.userId});
     });
 };
 
@@ -67,18 +67,17 @@ exports.findAll = (req, res) => {
     });
 };
 
-// id�� ��ȸ
-//userId의 user는 위의 객체 이름이고 Id는 그냥 id를 가져오는 건가봄
+// 이름으로 검색
+//userId는 uri 변수 이름
 exports.findOne = (req, res) => {
-
     User.findByID(req.params.userId, (err, data) => {
         if (err) {
-            if (err.kind === "not_found") {
+            if (err.kind == "not_found") {
                 res.status(404).send({  
                     message: 'Not found user with id '+ req.params.userId
                 });
             } else {
-                res.status(500).send({
+                res.status(500).json({
                     message: "Error retrieving User with id " + req.params.userId
                 });
             }
@@ -90,35 +89,37 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body) {
-        res.status(400).send({
+        res.status(400).json({
             message: "Content can not be empty!"
         });
     }
 
-    User.updateById(
-        req.params.usesrId,
+    User.updateByID(
+        req.params.userId,
         new User(req.body),
         (err, data) => {
             if (err) {
-                if (err.kind === "not_found") {
-                    res.status(404).send({
-                        message: `Not found User with id ${req.params.usesrId}.`
+                if (err.kind == "not_found") {
+                    res.status(404).json({
+                        message: "다시 입력해주세요."
                     });
                 } else {
-                    res.status(500).send({
-                        message: "Error updating User with id " + req.params.usesrId
+                    res.status(500).json({
+                        message: "Error updating User with id " + req.params.userId
                     });
                 }
-            } else res.send(data);
+            } else{
+                res.json({message:"수정 성공했습니다."});
+                // res.send(data);
+            }
+            
         }
     );
 };
-
-// id�� ����
-exports.delete = (req, res) => {
-    User.remove(req.params.userId, (err, data) => {
+exports.PWupdate =(req, res) => {
+    User.pw_update(req.params.userId, req.body.u_pw, (err, data)=>{
         if (err) {
-            if (err.kind === "not_found") {
+            if (err.kind == "not_found") {
                 res.status(404).send({
                     message: `Not found User with id ${req.params.userId}.`
                 });
@@ -127,7 +128,42 @@ exports.delete = (req, res) => {
                     message: "Could not delete User with id " + req.params.userId
                 });
             }
-        } else res.send({ message: `User was deleted successfully!` });
+        } else res.json({ message: `비밀번호 수정 성공했습니다.` });
+    }) 
+}
+
+exports.stUpdate =(req, res) => {
+    User.st_update(req.params.userId, new User(req.body),
+     (err, data)=>{
+        if (err) {
+            if (err.kind == "not_found") {
+                res.status(404).send({
+                    message: "다시 입력해주세요."
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete User with id " + req.params.userId
+                });
+            }
+        } else res.json({ message: `체형/스타일 수정 성공했습니다.` });
+    }) 
+}
+
+
+// id�� ����
+exports.delete = (req, res) => {
+    User.remove(req.params.userId, (err, data) => {
+        if (err) {
+            if (err.kind == "not_found") {
+                res.status(404).send({
+                    message: `Not found User with id ${req.params.userId}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete User with id " + req.params.userId
+                });
+            }
+        } else res.json({ message: `삭제 성공했습니다.` });
     });
 };
 
@@ -135,10 +171,10 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
     User.removeAll((err, data) => {
         if (err)
-            res.status(500).send({
+            res.status(500).json({
                 message:
                     err.message || "Some error occurred while removing all user."
             });
-        else res.send({ message: `All User were deleted successfully!` });
+        else res.json({ message: `All User were deleted successfully!` });
     });
 };
