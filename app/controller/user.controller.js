@@ -3,7 +3,7 @@ const User = require("../models/user.model.js");
 // �� ��ü ����
 exports.create = (req, res) => {
     if (!req.body) {
-        res.status(400).send({
+        res.status(400).json({
             message: "Content can not be empty!"
         });
     };
@@ -28,7 +28,7 @@ exports.create = (req, res) => {
     User.create(user, (err, data) => {
         //res.send('${id},${pw}');
         if (err) {
-            res.status(500).send({
+            res.status(500).json({
                 message:
                     err.message || "Some error occured while creating th User."
             });
@@ -75,11 +75,11 @@ exports.checkpw = (req, res) => {
 exports.findAll = (req, res) => {
     User.getAll((err, data) => {
         if (err)
-            res.status(500).send({
+            res.status(500).json({
                 message:
                     err.message || "Some error occurred while retrieving user."
             });
-        else res.send(data);
+        else res.json(data);
     });
 };
 
@@ -89,7 +89,7 @@ exports.findOne = (req, res) => {
     User.findByID(req.params.userId, (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
-                res.status(404).send({  
+                res.status(404).json({  
                     message: 'Not found user with id '+ req.params.userId
                 });
             } else {
@@ -105,7 +105,7 @@ exports.Mypage = (req, res)=>{
     User.findMypage(req.params.userId, (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
-                res.status(404).send({  
+                res.status(404).json({  
                     message: 'Not found user with id '+ req.params.userId
                 });
             } else {
@@ -152,11 +152,11 @@ exports.PWupdate =(req, res) => {
     User.pw_update(req.params.userId, req.body.u_pw, (err, data)=>{
         if (err) {
             if (err.kind == "not_found") {
-                res.status(404).send({
+                res.status(404).json({
                     message: `Not found User with id ${req.params.userId}.`
                 });
             } else {
-                res.status(500).send({
+                res.status(500).json({
                     message: "Could not delete User with id " + req.params.userId
                 });
             }
@@ -169,11 +169,11 @@ exports.stUpdate =(req, res) => {
      (err, data)=>{
         if (err) {
             if (err.kind == "not_found") {
-                res.status(404).send({
+                res.status(404).json({
                     message: "다시 입력해주세요."
                 });
             } else {
-                res.status(500).send({
+                res.status(500).json({
                     message: "Could not delete User with id " + req.params.userId
                 });
             }
@@ -187,11 +187,11 @@ exports.delete = (req, res) => {
     User.remove(req.params.userId, (err, data) => {
         if (err) {
             if (err.kind == "not_found") {
-                res.status(404).send({
+                res.status(404).json({
                     message: `Not found User with id ${req.params.userId}.`
                 });
             } else {
-                res.status(500).send({
+                res.status(500).json({
                     message: "Could not delete User with id " + req.params.userId
                 });
             }

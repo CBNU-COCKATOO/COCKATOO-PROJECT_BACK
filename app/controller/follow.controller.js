@@ -2,7 +2,7 @@ const Follow = require("../models/follow.model.js");
 
 exports.follow = (req, res) => {
     if (!req.body) {
-        res.status(400).send({
+        res.status(400).json({
             message: "Content can not be empty!"
         });
     };
@@ -18,7 +18,7 @@ exports.follow = (req, res) => {
             Follow.create(new Follow(req.body),
             (err, data)=>{
                 if (err) {
-                    res.status(500).send({
+                    res.status(500).json({
                         message:
                             err.message || "Some error occured while following."
                     });
@@ -42,7 +42,7 @@ exports.follow = (req, res) => {
 };
 exports.unfollow = (req, res) => {
     if (!req.body) {
-        res.status(400).send({
+        res.status(400).json({
             message: "Content can not be empty!"
         });
     }
