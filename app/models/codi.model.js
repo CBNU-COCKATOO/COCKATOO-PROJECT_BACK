@@ -6,7 +6,7 @@ const Codi = function(codi){
     this.codi_style = codi.codi_style;
     this.codi_image = codi.codi_image;
     this.codi_des = codi.codi_des;
-    this.codi_u_id = codi.codi_u_id;
+    this.u_id = codi.u_id;
 };
 
 //codi 튜플 추가
@@ -39,7 +39,7 @@ Codi.getAll = result =>{
 
 //user id로 코디 전체 조회
 Codi.findByID = (userId, result)=>{
-    sql.query('SELECT * FROM codi WHERE codi_u_id = ?', userId, (err, res)=>{
+    sql.query('SELECT * FROM codi WHERE u_id = ?', userId, (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);

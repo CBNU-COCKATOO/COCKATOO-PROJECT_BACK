@@ -3,5 +3,5 @@ module.exports = {
     USER: "root",
     PASSWORD: "gh12",
     DB: "PEACOCK",
-    multipleStatemens : true
+    multipleStatements : true
 };

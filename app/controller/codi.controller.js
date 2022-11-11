@@ -14,7 +14,7 @@ exports.create = (req,res)=>{
         codi_style : req.body.codi_style,
         codi_image : '/image/'+req.file.filename,
         codi_des : req.body.codi_des,
-        codi_u_id : req.body.codi_u_id
+        u_id : req.body.u_id
     });
 
     //데이터베이스에 저장
@@ -46,11 +46,11 @@ exports.findOne = (req,res)=>{
             if(err) {
                 if (err.kind == "not found") {
                     res.status(404).send({
-                        message: 'Not found Codi with codi_u_id ${req.params.userId}.'
+                        message: 'Not found Codi with u_id ${req.params.userId}.'
                     });
                 } else {
                     res.status(500).send({
-                        message: "Error retrieving Codi with codi_u_id" + req.params.userId
+                        message: "Error retrieving Codi with u_id" + req.params.userId
                     });
                 }
             } else res.send(data);

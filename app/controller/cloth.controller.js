@@ -16,7 +16,7 @@ exports.create = (req,res)=>{
         clo_image: '/image/'+req.file.filename,
         clo_des: req.body.clo_des,
         clo_type: req.body.clo_type,
-        clo_u_id: req.body.clo_u_id
+        u_id: req.body.u_id
     });
 
     // 데이터베이스에 저장
@@ -49,11 +49,11 @@ exports.findOne = (req,res)=>{
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+            message: `Not found Cloth with u_id ${req.params.userId}.`
           });
         } else {
           res.status(500).send({
-            message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+            message: "Error retrieving Cloth with u_id " + req.params.userId
           });
         }
       } else res.send(data);
@@ -65,11 +65,11 @@ exports.outerfind = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+          message: `Not found Cloth with u_id ${req.params.userId}.`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+          message: "Error retrieving Cloth with u_id " + req.params.userId
         });
       }
     } else res.send(data);
@@ -81,11 +81,11 @@ exports.topfind = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+          message: `Not found Cloth with u_id ${req.params.userId}.`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+          message: "Error retrieving Cloth with u_id " + req.params.userId
         });
       }
     } else res.send(data);
@@ -97,11 +97,11 @@ exports.bottomfind = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+          message: `Not found Cloth with u_id ${req.params.userId}.`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+          message: "Error retrieving Cloth with u_id " + req.params.userId
         });
       }
     } else res.send(data);
@@ -113,11 +113,11 @@ exports.shoesfind = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Cloth with clo_u_id ${req.params.userId}.`
+          message: `Not found Cloth with u_id ${req.params.userId}.`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving Cloth with clo_u_id " + req.params.userId
+          message: "Error retrieving Cloth with u_id " + req.params.userId
         });
       }
     } else res.send(data);
