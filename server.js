@@ -36,7 +36,7 @@ require("./app/routes/cody.routes.js")(app);
 require("./app/routes/image.routes.js")(app);
 require("./app/routes/follow.routes.js")(app);
 require("./app/routes/ranking.routes.js")(app);
-require("./app/routes/closet.routes.js")
+require("./app/routes/closet.routes.js")(app);
 require("./app/routes/search.routes.js")(app);
 
 // 포트넘버 설정
