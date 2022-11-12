@@ -1,15 +1,16 @@
 const mysql = require("mysql");
 const dbConfig = require("../config/db.config.js");
 
-// µ¥ÀÌÅÍº£ÀÌ½º connection °´Ã¼ »ý¼º
+// ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ connection ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 const connection = mysql.createConnection({
     host: dbConfig.HOST,
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
-    database: dbConfig.DB
+    database: dbConfig.DB,
+    multipleStatements: true
 });
 
-// MySQL connection ½ÇÇà
+// MySQL connection ï¿½ï¿½ï¿½ï¿½
 connection.connect(error => {
     if (error) throw error;
     console.log("Successfully connected to the database. ");
