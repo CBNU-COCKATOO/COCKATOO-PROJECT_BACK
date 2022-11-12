@@ -34,7 +34,7 @@ exports.findAll = (req,res)=>{
             message:
                 err.message || "some error occurred while retrieving cody."
         });
-        else res.send(data);
+        else res.status(200).json(data);
     });
 };
 //사용자 아이디로 조회
@@ -52,7 +52,7 @@ exports.findOne = (req,res)=>{
                         message: "Error retrieving Cody with u_id" + req.params.userId
                     });
                 }
-            } else res.send(data);
+            } else res.status(200).json(data);
         });
 };
 
@@ -79,7 +79,7 @@ exports.update = (req,res)=>{
             message: "Error updating Cody with cody_id " + req.params.codyId
           });
         }
-      } else res.send(data);
+      } else res.status(200).json(data);
     }
   );
 };
@@ -97,7 +97,7 @@ exports.delete = (req,res)=>{
               message: "Could not delete Cody with cody_id " + req.params.codyId
             });
           }
-        } else res.send({ message: `Cody was deleted successfully!` });
+        } else res.status(200).json({ message: `Cody was deleted successfully!` });
       });
 };
 
@@ -109,6 +109,6 @@ exports.deleteAll = (req,res)=>{
             message:
               err.message || "Some error occurred while removing all codies."
           });
-        else res.send({ message: `All Codies were deleted successfully!` });
+        else res.status(200).json({ message: `All Codies were deleted successfully!` });
       });
 };

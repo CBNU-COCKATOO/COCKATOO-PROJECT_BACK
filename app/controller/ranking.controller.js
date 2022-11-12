@@ -12,7 +12,7 @@ exports.getranking = (req, res) =>{
               message: "Error retrieving UserRandom "
             });
           }
-        } else res.send(data);
+        } else res.status(200).json(data);
 
 });
 };

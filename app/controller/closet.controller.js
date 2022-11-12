@@ -27,7 +27,7 @@ exports.findByID = (req, res) =>{
                   message: "Error retrieving Closet with u_id " + req.params.userId
                 });
               }
-            } else res.send(data);
+            } else res.status(200).json(data);
 
     });
 

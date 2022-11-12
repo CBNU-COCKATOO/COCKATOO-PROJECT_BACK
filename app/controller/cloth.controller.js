@@ -26,7 +26,7 @@ exports.create = (req,res)=>{
                 message:
                 err.message || "Some error occured while creating th Cloth."
             });
-        else res.send(data);
+        else res.status(200).json({message:"Successfully Created."});
     }) 
 };
 // 전체 조회 
@@ -37,7 +37,7 @@ exports.findAll = (req,res)=>{
             message:
               err.message || "Some error occurred while retrieving clothes."
           });
-        else res.send(data);
+        else res.status(200).json(data);
       });
 };
 
@@ -56,7 +56,7 @@ exports.findOne = (req,res)=>{
             message: "Error retrieving Cloth with clo_u_id " + req.params.userId
           });
         }
-      } else res.send(data);
+      } else res.status(200).json(data);
     });
 };
 
@@ -72,7 +72,7 @@ exports.outerfind = (req, res) => {
           message: "Error retrieving Cloth with clo_u_id " + req.params.userId
         });
       }
-    } else res.send(data);
+    } else res.status(200).json(data);
   });  
 };
 
@@ -88,7 +88,7 @@ exports.topfind = (req, res) => {
           message: "Error retrieving Cloth with clo_u_id " + req.params.userId
         });
       }
-    } else res.send(data);
+    } else res.status(200).json(data);
   });  
 };
 
@@ -104,7 +104,7 @@ exports.bottomfind = (req, res) => {
           message: "Error retrieving Cloth with clo_u_id " + req.params.userId
         });
       }
-    } else res.send(data);
+    } else res.status(200).json(data);
   });  
 };
 
@@ -120,7 +120,7 @@ exports.shoesfind = (req, res) => {
           message: "Error retrieving Cloth with clo_u_id " + req.params.userId
         });
       }
-    } else res.send(data);
+    } else res.status(200).json(data);
   });  
 };
 
@@ -147,7 +147,7 @@ exports.update = (req,res)=>{
             message: "Error updating Cloth with clo_id " + req.params.clothId
           });
         }
-      } else res.send(data);
+      } else res.status(200).json(data);
     }
   );
 };
@@ -165,7 +165,7 @@ exports.delete = (req,res)=>{
               message: "Could not delete Cloth with clo_id " + req.params.clothId
             });
           }
-        } else res.send({ message: `Cloth was deleted successfully!` });
+        } else res.status(200).json({ message: `Cloth was deleted successfully!` });
       });
 };
 
@@ -177,6 +177,6 @@ exports.deleteAll = (req,res)=>{
             message:
               err.message || "Some error occurred while removing all clothes."
           });
-        else res.send({ message: `All Clothes were deleted successfully!` });
+        else res.status(200).json({ message: `All Clothes were deleted successfully!` });
       });
 };
