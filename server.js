@@ -32,7 +32,7 @@ app.get("/", (req, res)=>{
 require("./app/routes/cloth.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
 require("./app/routes/login.routes.js")(app);
-require("./app/routes/codi.routes.js")(app);
+require("./app/routes/cody.routes.js")(app);
 require("./app/routes/image.routes.js")(app);
 require("./app/routes/follow.routes.js")(app);
 require("./app/routes/ranking.routes.js")(app);
