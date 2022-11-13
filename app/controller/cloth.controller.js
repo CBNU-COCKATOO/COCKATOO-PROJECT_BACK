@@ -13,7 +13,7 @@ exports.create = (req,res)=>{
         clo_maker: req.body.clo_maker,
         clo_size: req.body.clo_size,
         clo_style: req.body.clo_style,
-        clo_image: '/image/'+req.file.filename,
+        clo_image: req.body.clo_image,
         clo_des: req.body.clo_des,
         clo_type: req.body.clo_type,
         clo_u_id: req.body.clo_u_id

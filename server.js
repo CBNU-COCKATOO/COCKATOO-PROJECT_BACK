@@ -38,6 +38,7 @@ require("./app/routes/follow.routes.js")(app);
 require("./app/routes/ranking.routes.js")(app);
 require("./app/routes/closet.routes.js")(app);
 require("./app/routes/search.routes.js")(app);
+require("./app/routes/random.routes.js")(app);
 
 // 포트넘버 설정
 app.listen(3000, ()=>{
