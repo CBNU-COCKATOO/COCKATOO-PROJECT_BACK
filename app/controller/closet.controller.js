@@ -20,8 +20,8 @@ exports.findByID = (req, res) =>{
     User.IDCheck(u_id, (err,data)=>{
       if(err){
         if (err.kind == "not_found") {
-            res.status(404).send({
-              message: `해당 사용자가 없습니다.`
+            res.status(404).json({
+              message: "해당 사용자가 없습니다."
             });
           } 
         //   else {
@@ -34,11 +34,11 @@ exports.findByID = (req, res) =>{
           sql.query(sql1s+sql2s+sql3s+sql4s+sql5s+sql6s, (err, data)=>{
             if(err){
                 if (err.kind == "not_found") {
-                    res.status(404).send({
+                    res.status(404).json({
                       message: `Not found Closet with u_id ${req.params.userId}.`
                     });
                   } else {
-                    res.status(500).send({
+                    res.status(500).json({
                       message: "Error retrieving Closet with u_id " + req.params.userId
                     });
                   }
