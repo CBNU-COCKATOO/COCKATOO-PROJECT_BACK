@@ -9,7 +9,7 @@ const Cloth = function(cloth){
     this.clo_image=cloth.clo_image;
     this.clo_des=cloth.clo_des;
     this.clo_type = cloth.clo_type;
-    this.clo_u_id = cloth.clo_u_id;
+    this.u_id = cloth.u_id;
 };
 
 // cloth 튜플 추가 
@@ -28,7 +28,7 @@ Cloth.create = (newCloth, result)=>{
 
 // user id로 조회
 Cloth.findByID = (clothId, result)=>{
-    sql.query('SELECT * FROM clothes WHERE clo_u_id = ?',clothId, (err, res)=>{
+    sql.query('SELECT * FROM clothes WHERE u_id = ?',clothId, (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -48,7 +48,7 @@ Cloth.findByID = (clothId, result)=>{
 
 // user id로 outer 조회
 Cloth.findOuter = (userId, result)=>{
-    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "outer"', userId, (err, res)=>{
+    sql.query('SELECT * FROM clothes WHERE u_id = ? AND clo_type = "outer"', userId, (err, res)=>{
         console.log("res: ", res);
         if(err){
             console.log("error: ", err);
@@ -69,7 +69,7 @@ Cloth.findOuter = (userId, result)=>{
 
 // user id로 top 조회
 Cloth.findTop = (userId, result)=>{
-    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "top"', userId, (err, res)=>{
+    sql.query('SELECT * FROM clothes WHERE u_id = ? AND clo_type = "top"', userId, (err, res)=>{
         console.log("res: ", res);
         if(err){
             console.log("error: ", err);
@@ -90,7 +90,7 @@ Cloth.findTop = (userId, result)=>{
 
 // user id로 bottom 조회
 Cloth.findBottom = (userId, result)=>{
-    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "bottom"', userId, (err, res)=>{
+    sql.query('SELECT * FROM clothes WHERE u_id = ? AND clo_type = "bottom"', userId, (err, res)=>{
         console.log("res: ", res);
         if(err){
             console.log("error: ", err);
@@ -111,7 +111,7 @@ Cloth.findBottom = (userId, result)=>{
 
 // user id로 shoes 조회
 Cloth.findShoes = (userId, result)=>{
-    sql.query('SELECT * FROM clothes WHERE clo_u_id = ? AND clo_type = "shoes"', userId, (err, res)=>{
+    sql.query('SELECT * FROM clothes WHERE u_id = ? AND clo_type = "shoes"', userId, (err, res)=>{
         console.log("res: ", res);
         if(err){
             console.log("error: ", err);
