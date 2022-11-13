@@ -87,7 +87,7 @@ Follow.delete = (follow, result) => {
 
 Follow.List = (follower_id, result) => {
 
-    sql.query('WITH follow_info AS (SELECT u_id, u_image, u_name, followee_id from USER, FOLLOW WHERE u_id = followee_id) SELECT u.u_id, u.u_name, u.u_image FROM follow_info f, USER u WHERE ? = f.followee_id;', 
+    sql.query('WITH follow_info AS (SELECT u_id, u_image, u_name, followee_id, follower_id from FOLLOW, USER WHERE u_id = follower_id) SELECT u.u_id, u.u_name, u.u_image, f.followee_id, f.follower_id FROM follow_info f JOIN USER u ON ? = f.follower_id and f.followee_id = u.u_id;', 
     follower_id, (err, res) => {
         if (err) {
             console.log("error: ", err);
