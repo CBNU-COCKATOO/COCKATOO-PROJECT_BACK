@@ -3,5 +3,6 @@ module.exports = app => {
     
     app.post("/follow", follow.follow);
     app.post("/unfollow", follow.unfollow);
+    app.get("/followuser/:userId", follow.follow_closet);
 
 };

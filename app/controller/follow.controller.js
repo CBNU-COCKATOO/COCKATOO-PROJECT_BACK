@@ -77,3 +77,13 @@ exports.unfollow = (req, res) => {
         }
     );
 };
+exports.follow_closet = (req, res) =>{
+    Follow.List(req.params.userId, (err,data)=>{
+        if(err.kind=="not_found"){
+            res.json({
+                message: "팔로우 하는 사람이 없습니다."
+            })
+        }
+            res.json(data);
+    })
+};

@@ -85,4 +85,24 @@ Follow.delete = (follow, result) => {
         });
     });
 };
+
+Follow.List = (follower_id, result) => {
+
+    sql.query('WITH follow_info AS (SELECT u_id, u_image, u_name, followee_id from USER, FOLLOW WHERE u_id = followee_id) SELECT u.u_id, u.u_name, u.u_image FROM follow_info f, USER u WHERE ? = f.followee_id;', 
+    follower_id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        };
+        if (!res.length) {
+            result({ kind: "not_found" }, null);
+            
+        }else{
+            result({kind:"find"}, res);
+            //result(null, res[0]);
+            return;
+        }        
+    });
+};
 module.exports = Follow;

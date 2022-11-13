@@ -8,12 +8,17 @@ exports.create = (req, res) => {
         });
     };
 
+    const u_id =req.body.u_id.trim();
+    const u_pw = req.body.u_pw.trim();
+    const u_name = req.body.u_name.trim();
+    const u_email = req.body.u_email.trim();
+    
     const user = new User({
-        u_id: req.body.u_id,
-        u_pw: req.body.u_pw,
-        u_name: req.body.u_name,
+        u_id: u_id,
+        u_pw: u_pw,
+        u_name: u_name,
         u_image: req.body.u_image,
-        u_email: req.body.u_email,
+        u_email: u_email,
         u_height: req.body.u_height,
         u_weight: req.body.u_weight,
         u_mainst: req.body.u_mainst,
@@ -24,9 +29,9 @@ exports.create = (req, res) => {
     });
 
 
-    // �����ͺ��̽��� ����
+    // 사용자 생성
     User.create(user, (err, data) => {
-        //res.send('${id},${pw}');
+        //res.send(`${id},${pw}`);
         if (err) {
             res.status(500).json({
                 message:
