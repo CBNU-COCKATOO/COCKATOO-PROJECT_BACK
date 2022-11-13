@@ -94,7 +94,7 @@ User.findByID = (userId, result) => {
 
 User.findMypage = (userId, result) => {
     
-    sql.query('SELECT u_name, u_image, u_height, u_weight, u_mainst FROM USER WHERE u_id = ?', userId, (err, res) => {
+    sql.query('SELECT u_name, u_image, u_height, u_weight, u_mainst, u_follower FROM USER WHERE u_id = ?', userId, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
