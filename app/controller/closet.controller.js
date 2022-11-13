@@ -1,4 +1,5 @@
 const sql = require("../models/db.js");
+const User = require("../models/user.model.js");
 
 exports.findByID = (req, res) =>{
     const u_id = req.params.userId;
@@ -16,19 +17,35 @@ exports.findByID = (req, res) =>{
     const sql6 = 'SELECT * FROM clothes WHERE u_id = ? AND clo_type = "shoes";'; // 신발 목록
     const sql6s = sql.format(sql6, u_id);
 
-    sql.query(sql1s+sql2s+sql3s+sql4s+sql5s+sql6s, (err, data)=>{
-        if(err){
-            if (err.kind === "not_found") {
-                res.status(404).send({
-                  message: `Not found Closet with u_id ${req.params.userId}.`
-                });
-              } else {
-                res.status(500).send({
-                  message: "Error retrieving Closet with u_id " + req.params.userId
-                });
-              }
-            } else res.status(200).json(data);
-
-    });
+    User.IDCheck(u_id, (err,data)=>{
+      if(err){
+        if (err.kind == "not_found") {
+            res.status(404).send({
+              message: `해당 사용자가 없습니다.`
+            });
+          } 
+        //   else {
+        //     res.status(500).send({
+        //       message: "Error retrieving Closet with u_id " + req.params.userId
+        //     });
+        //   }
+        // }
+        else {
+          sql.query(sql1s+sql2s+sql3s+sql4s+sql5s+sql6s, (err, data)=>{
+            if(err){
+                if (err.kind == "not_found") {
+                    res.status(404).send({
+                      message: `Not found Closet with u_id ${req.params.userId}.`
+                    });
+                  } else {
+                    res.status(500).send({
+                      message: "Error retrieving Closet with u_id " + req.params.userId
+                    });
+                  }
+                }else res.status(200).json(data);
+              });
+        };
+    }
+  });
 
 };
