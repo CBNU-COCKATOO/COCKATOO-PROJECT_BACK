@@ -1,6 +1,6 @@
 const sql = require("./db.js");
 //UUID 생성 함수 라이브러리
-const crypto = require('crypto');
+const { uuid } = require('uuidv4');
 
 const Follow = function(follow){
     this.follower_id = follow.follower_id;
@@ -28,8 +28,7 @@ Follow.check = (follow, result) => {
 };
 
 Follow.create = (follow, result) => {
-    const uuid = crypto.randomUUID();
-    const f_num = uuid;
+    const f_num = uuid();
     sql.query('INSERT INTO FOLLOW VALUES(?, ?, ?, default)', [f_num, follow.follower_id, follow.followee_id], (err, res) => {
         if (err) {
             console.log("error: ", err);
