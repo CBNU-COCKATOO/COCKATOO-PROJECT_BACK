@@ -79,7 +79,7 @@ exports.update = (req,res)=>{
             message: "Error updating Cody with cody_id " + req.params.codyId
           });
         }
-      } else res.status(200).json(data);
+      } else res.status(200).json({message:"Successfully repaired."});
     }
   );
 };

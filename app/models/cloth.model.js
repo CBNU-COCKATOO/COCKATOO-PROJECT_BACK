@@ -146,8 +146,8 @@ Cloth.getAll = result =>{
 
 // cloth id로 수정
 Cloth.updateByID = (clo_id, cloth, result)=>{
-    sql.query('UPDATE clothes SET clo_name = ?, clo_maker = ?, clo_size = ?, clo_style =?, clo_des = ? WHERE clo_id = ?', 
-    [cloth.clo_name, cloth.clo_maker, cloth.clo_size, cloth.clo_style, cloth.clo_des, clo_id], (err, res)=>{
+    sql.query('UPDATE clothes SET clo_name = ?, clo_maker = ?, clo_size = ?, clo_style =?, clo_image = ?, clo_des = ? WHERE clo_id = ?', 
+    [cloth.clo_name, cloth.clo_maker, cloth.clo_size, cloth.clo_style, cloth.clo_image, cloth.clo_des, clo_id], (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);

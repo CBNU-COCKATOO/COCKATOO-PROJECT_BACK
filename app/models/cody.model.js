@@ -59,8 +59,8 @@ Cody.findByID = (userId, result)=>{
 
 // codi id로 수정
 Cody.updateByID = (cody_id, cody, result)=>{
-    sql.query('UPDATE cody SET cody_name = ?, cody_style = ?, cody_des=? WHERE cody_id = ?', 
-    [cody.cody_name, cody.cody_style, cody.cody_des, cody_id], (err, res)=>{
+    sql.query('UPDATE cody SET cody_name = ?, cody_style = ?, cody_image =?, cody_des=? WHERE cody_id = ?', 
+    [cody.cody_name, cody.cody_style, cody.cody_image, cody.cody_des, cody_id], (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);

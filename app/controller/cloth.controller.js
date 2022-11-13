@@ -147,7 +147,7 @@ exports.update = (req,res)=>{
             message: "Error updating Cloth with clo_id " + req.params.clothId
           });
         }
-      } else res.status(200).json(data);
+      } else res.status(200).json({message:"Successfully repaired."});
     }
   );
 };
