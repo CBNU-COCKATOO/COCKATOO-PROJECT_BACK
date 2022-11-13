@@ -83,7 +83,6 @@ exports.follow_closet = (req, res) =>{
             res.json({
                 message: "팔로우 하는 사람이 없습니다."
             })
-        }
-            res.json(data);
+        }else res.json(data);
     })
 };
