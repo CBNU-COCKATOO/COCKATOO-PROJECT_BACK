@@ -3,7 +3,7 @@ require('dotenv').config();
 
 exports.EmailSend = async(req, res, next) =>{
     const u_emailaddress = req.body.u_email;
-    let authNum = Math.random().toString(36).slice(2);
+    let authNum = Math.random().toString(36).substring(3,7);
     res.locals.authNum = authNum;
     console.log(authNum);
     //const hashAuth = await bcrypt.hash(authNum, 12);
@@ -25,28 +25,31 @@ exports.EmailSend = async(req, res, next) =>{
     
       let mailOptions = await transporter.sendMail({
         //보내는 곳의 이름과, 메일 주소를 입력
-        from: `"COCKATOO Team" <${process.env.NODEMAILER_USER}>`,
+        from: `[COCKATOO Team] <${process.env.NODEMAILER_USER}>`,
         //사용자 메일 주소
         to: u_emailaddress,
         //메일 제목
         subject: 'PEACOCK 이메일 인증',
         //메일 내용
         text: authNum,
-        html: `<h1>이메일 인증</h1>
+        html: `
+        <h1 style="color: #7939FF">PEACOCK 이메일 인증</h1>
+        <br/><br/>
         <div>
-          아래 번호를 적어 인증을 완료해주세요.
+          아래 번호를 적어 인증을 완료해주세요. 
+          <br/>
           <b>${authNum}</b>
         </div>`,
       });
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log(info);
+    //const info = await transporter.sendMail(mailOptions);
+    //console.log(info);
     
-    next();
+     await next();
     //next('route');
 };
 
-exports.EmailCheck = async(req, res, next) =>{
+exports.EmailCheck = async(req, res) =>{
     let AuthCode = req.body.u_authNum;
     //const hashAuth = await bcrypt.hash(authNum, 12);
     try {
