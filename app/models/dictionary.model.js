@@ -1,6 +1,6 @@
 const sql = require("./db.js");
 //const { uuid } = require('uuidv4');
-import { v4 as uuid_v4 } from "uuid";
+const { v4: uuidv4 } = require('uuid')
 
 // ������ 
 const Dict = function (dict) {
@@ -9,7 +9,7 @@ const Dict = function (dict) {
 };
 //user id로 index에 사진 추가한 현황 저장
 Dict.create = (userId, dict, result) => {
-    const d_num = uuid_v4();
+    const d_num = uuidv4();
     sql.query('INSERT INTO DICTIONARY VALUES(?, ?, ?, ?, default)', [d_num, dict.d_index, dict.d_image, userId], (err, res) => {
         if (err) {
             console.log("error: ", err);
