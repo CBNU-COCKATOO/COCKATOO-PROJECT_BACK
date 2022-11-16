@@ -29,7 +29,7 @@ const upload = multer({
 
 module.exports = app =>{
     //const multer = require('multer');
-    app.post('/imageUpload', upload.single('file'), getcolor, async (req, res) => {
+    app.post('/imageUpload', upload.single('file'), async (req, res) => {
         try{
             console.log(req.file.location);
             res.status(200).json({ location: `${req.file.location}`});
