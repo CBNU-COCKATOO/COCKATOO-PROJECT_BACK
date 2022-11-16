@@ -22,11 +22,13 @@ exports.CreateIndex = (req, res) =>{
         message: "Content can not be empty!"
     });
   }else{
+    console.log("컨트롤 쪽 받기 req.body.d_index: "+req.body.d_index);
+    console.log("req.body.d_image:"+req.body.d_image);
     const dict = new Dict({
       d_index : req.body.d_index,
       d_image : req.body.d_image
       });
-      console.log(req.body.d_index);
+      
     
       Dict.create(req.params.userId, dict, (err,data)=>{
         if (err) {
