@@ -43,9 +43,7 @@ exports.CreateIndex = (req, res) =>{
 exports.GetDict = (req, res) => {
   Dict.getAll(req.params.userId, (err,data)=>{
     if(err.kind=="not_found"){
-        res.json({
-            message: "저장된 도감 정보가 없습니다."
-        })
+        res.json(data);
     }else res.json(data);
   })
 

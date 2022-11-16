@@ -56,7 +56,7 @@ Dict.getAll = (userId, result) => {
             return;
         }else{
             if(!res.length){
-                result({ kind: "not_found" }, null);
+                result({ kind: "not_found" }, res);
             }else{
                 console.log("indexes: ", res);
                 result({kind:"found"}, res);
