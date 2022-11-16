@@ -63,5 +63,14 @@ Dict.getAll = (userId, result) => {
         };
     });
 };
+Dict.DeleteById = (userId, d_index, result) => {
+    sql.query('DELETE FROM DICTIONARY WHERE d_index =? AND u_id = ?;', [d_index, userId], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }else{result({kind:"success"}, res);     };
+    });
+};
 
 module.exports = Dict;

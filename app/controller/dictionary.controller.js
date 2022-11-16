@@ -34,7 +34,7 @@ exports.CreateIndex = (req, res) =>{
         if (err) {
           res.status(500).json({
               message:
-                  err.message || "Some error occured while creating Dictionart Index."
+                  err.message || "Some error occured while creating Dictionary Index."
           });
         }else res.status(200).json({
           message:"성공적으로 Index 정보를 저장했습니다."
@@ -50,4 +50,17 @@ exports.GetDict = (req, res) => {
     }else res.json(data);
   })
 
+};
+
+exports.Delete=(req,res)=>{
+  Dict.DeleteById(req.params.userId, req.params.indexId,(err,data)=>{
+    if(err.kind=="not_found"){
+      res.json({
+        message:
+            err.message || "Some error occured while delete Dictionary Index."
+    });
+  }else res.json({
+    message: "성공적으로 인덱스 삭제됐습니다."
+  });
+  })
 };

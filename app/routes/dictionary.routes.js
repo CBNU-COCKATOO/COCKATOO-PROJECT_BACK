@@ -3,4 +3,5 @@ module.exports = app => {
     app.get("/dictionaryimage/:userId", dict.clo_cody);
     app.post("/dictionary/:userId", dict.CreateIndex);
     app.get("/dictionary/:userId", dict.GetDict);
+    app.delete("/dictionary/:userId/:indexId", dict.Delete);
 };
