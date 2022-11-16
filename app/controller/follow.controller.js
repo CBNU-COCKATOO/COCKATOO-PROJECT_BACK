@@ -27,11 +27,12 @@ exports.follow = (req, res) => {
                                 err.message || "Some error occured while following."
                         });
                     }
-                    else
-                    res.json({
-                        message:"성공적으로 팔로우했습니다."
+                    else{
+                        res.json({
+                            message:"성공적으로 팔로우했습니다."
+                        });
                     }
-                    );
+                    
                 })
             }else{
                 // res.json({
