@@ -1,6 +1,8 @@
 const multer = require('multer');
 const AWS = require('aws-sdk');
 const multerS3 = require('multer-s3');
+const { resolve } = require('path');
+const ColorThief = require('colorthief');
 require('dotenv').config();
 //보안키는 .env파일로 관리
 const s3 = new AWS.S3({
@@ -8,9 +10,8 @@ const s3 = new AWS.S3({
     secretAccessKey: process.env.S3_PRIVATE_KEY,
     region: 'ap-northeast-2',
 })
-
 const upload = multer({
-    
+
     storage : multerS3({
         s3:s3,
         bucket:'peacock-image',
@@ -30,7 +31,7 @@ const upload = multer({
 
 module.exports = app =>{
     //const multer = require('multer');
-    app.post('/imageUpload', upload.single('file'), async (req, res) => {
+    app.post('/imageUpload', upload.single('file'), getcolor, async (req, res) => {
         try{
             console.log(req.file.location);
             res.status(200).json({ location: `${req.file.location}`});
@@ -42,9 +43,3 @@ module.exports = app =>{
         
     });
 }
-
-// 이미지 업로드 요청
-// router.post('/img', upload.single('file'), async (req, res) => {
-//     console.log(req.file.location)
-//     res.status(200).json({ location: req.file.location })
-// });
