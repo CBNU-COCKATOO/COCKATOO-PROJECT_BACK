@@ -23,9 +23,9 @@ Dict.create = (userId, newdict, result) => {
 
 // user id로 옷&코디 이미지 불러오기
 Dict.findByID = (userId, result) => {
-    const sql1 = 'SELECT cody_image d_image from cody c WHERE c.u_id = ?;'; //사용자 정보
+    const sql1 = 'SELECT cody_image img from cody c WHERE c.u_id = ?;'; //사용자 정보
     const sql1s = sql.format(sql1, userId);
-    const sql2 = 'SELECT clo_image d_image from clothes clo WHERE clo.u_id = ?;'; //사용자 정보
+    const sql2 = 'SELECT clo_image img from clothes clo WHERE clo.u_id = ?;'; //사용자 정보
     const sql2s = sql.format(sql2, userId);
     
     sql.query(sql1s+sql2s, (err, res) => {
