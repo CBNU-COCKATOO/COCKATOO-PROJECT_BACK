@@ -62,7 +62,6 @@ exports.EmailCheck = (req, res) =>{
       } catch(err) {
         res.json({ message : "인증에 실패했습니다." });
         console.error(err);
-        next(err);
       }
     
 };
