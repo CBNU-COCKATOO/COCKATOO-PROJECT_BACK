@@ -10,6 +10,7 @@ const Cloth = function(cloth){
     this.clo_des=cloth.clo_des;
     this.clo_type = cloth.clo_type;
     this.u_id = cloth.u_id;
+    this.clo_color = cloth.clo_color;
 };
 
 // cloth 튜플 추가 
@@ -21,8 +22,8 @@ Cloth.create = (newCloth, result)=>{
             return;
         }
 
-        console.log("Created cloth: ",{id:res.inseertId, ...newCloth });
-        result(null, {id: res.inseertId, ...newCloth});
+        console.log("Created cloth: ",{id:res.insertId, ...newCloth });
+        result(null, {id: res.insertId, ...newCloth});
     });
 };
 
@@ -146,8 +147,8 @@ Cloth.getAll = result =>{
 
 // cloth id로 수정
 Cloth.updateByID = (clo_id, cloth, result)=>{
-    sql.query('UPDATE clothes SET clo_name = ?, clo_maker = ?, clo_size = ?, clo_style =?, clo_image = ?, clo_des = ? WHERE clo_id = ?', 
-    [cloth.clo_name, cloth.clo_maker, cloth.clo_size, cloth.clo_style, cloth.clo_image, cloth.clo_des, clo_id], (err, res)=>{
+    sql.query('UPDATE clothes SET clo_name = ?, clo_maker = ?, clo_size = ?, clo_style =?, clo_image = ?, clo_des = ?, clo_color = ? WHERE clo_id = ?', 
+    [cloth.clo_name, cloth.clo_maker, cloth.clo_size, cloth.clo_style, cloth.clo_image, cloth.clo_des, cloth.clo_color, clo_id], (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);
