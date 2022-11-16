@@ -8,9 +8,9 @@ const Dict = function (dict) {
     this.d_image = dict.d_image;
 };
 //user id로 index에 사진 추가한 현황 저장
-Dict.create = (userId, dict, result) => {
+Dict.create = (userId, newdict, result) => {
     const d_num = uuidv4();
-    sql.query('INSERT INTO DICTIONARY VALUES(?, ?, ?, ?, default)', [d_num, dict.d_index, dict.d_image, userId], (err, res) => {
+    sql.query('INSERT INTO DICTIONARY (d_num, d_index, d_image, u_id, d_time) VALUES(?, ?, ?, ?, default)', [d_num, newdict.d_index, newdict.d_image, userId], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
