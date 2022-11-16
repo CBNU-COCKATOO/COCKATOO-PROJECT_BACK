@@ -3,6 +3,5 @@ module.exports = app => {
     // app.get("/search/:username",search.SearchUser);
     // app.get("/search/:cloname", search.SearchClo);
     // app.get("/search/:codiname,", search.SearchCodi);
-    app.get("/search", search.SearchAll);
-
+    app.post("/search", search.SearchAll);
 };
