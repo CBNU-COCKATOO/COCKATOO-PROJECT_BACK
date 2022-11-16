@@ -15,8 +15,7 @@ Dict.create = (userId, dict, result) => {
             console.log("error: ", err);
             result(err, null);
             return;
-        }
-        console.log("Created dict_index: ", dict.d_index);
+        }else console.log("Created dict_index: ", dict.d_index);
     });
     result(null, {kind:"created"});
 
