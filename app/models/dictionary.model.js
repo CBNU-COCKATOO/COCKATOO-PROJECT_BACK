@@ -34,17 +34,17 @@ Dict.findByID = (userId, result) => {
             console.log("error: ", err);
             result(err, null);
             return;
+        }else{
+            if (res.length) {
+                let c_image = Object.assign(res[0],res[1]);
+                console.log("검색 아이디:", userId);
+                console.log("found customer: ", res[0]);
+                result({kind:"found"}, c_image);
+                return;
+            }else{
+                result({ kind: "not_found" }, null);
+            }
         }
-
-        if (res.length) {
-            let c_image = Object.assign(res[0],res[1]);
-            console.log("검색 아이디:", userId);
-            console.log("found customer: ", res[0]);
-            result({kind:"found"}, c_image);
-            return;
-        }
-
-        result({ kind: "not_found" }, null);
     });
 };
 
@@ -54,10 +54,14 @@ Dict.getAll = (userId, result) => {
             console.log("error: ", err);
             result(err, null);
             return;
-        }
-
-        console.log("indexes: ", res);
-        result({kind:"found"}, res);
+        }else{
+            if(!res.length){
+                result({ kind: "not_found" }, null);
+            }else{
+                console.log("indexes: ", res);
+                result({kind:"found"}, res);
+            };
+        };
     });
 };
 
