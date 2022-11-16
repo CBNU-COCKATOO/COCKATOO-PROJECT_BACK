@@ -69,7 +69,6 @@ Follow.delete = (follow, result) => {
             return;
         }else {
             console.log("deleted follow");
-            result(null, res);
             sql.query('UPDATE USER SET u_following = u_following - 1 WHERE u_id =? ', follow.follower_id, (err)=>{
                 if(err){
                     console.log("error: ", err);
@@ -85,6 +84,7 @@ Follow.delete = (follow, result) => {
                     return;
                 }else console.log(follow.followee_id + "의 팔로우 수 감소 성공");
             });
+            result(null, res);
         }
     });
 };
