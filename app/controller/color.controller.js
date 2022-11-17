@@ -13,12 +13,12 @@ exports.anlycolor = (req, res) => {
             //request.session.loggedin =true;
             //request.session.username = u_id;
             res.json(result);
+            return;
           } else {
             console.log({message:"데이터가 없습니다."});
             res.json({message:"데이터가 없습니다."});
+            return;
           }
       }
-  
-      
     });
 };
