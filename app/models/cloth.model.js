@@ -11,6 +11,7 @@ const Cloth = function(cloth){
     this.clo_type = cloth.clo_type;
     this.u_id = cloth.u_id;
     this.clo_color = cloth.clo_color;
+    this.clo_open = cloth.clo_open;
 };
 
 // cloth 튜플 추가 
@@ -20,10 +21,10 @@ Cloth.create = (newCloth, result)=>{
             console.log("error: ", err);
             result(err, null);
             return;
-        }
-
-        console.log("Created cloth: ",{id:res.insertId, ...newCloth });
-        result(null, {id: res.insertId, ...newCloth});
+        }else {
+            console.log("Created cloth: ",{id:res.insertId, ...newCloth });
+            result(null, {id: res.insertId, ...newCloth});
+        } 
     });
 };
 
@@ -34,16 +35,17 @@ Cloth.findByID = (clothId, result)=>{
             console.log("error: ", err);
             result(err, null);
             return;
-        }
-
-        if(res.length){
-            console.log("found cloth: ", res);
-            result(null, res);
-            return;
-        }
-
-        // 결과가 없을 시 
-        result({kind: "not_found"}, null);
+        }else {
+            if(res.length){
+                console.log("found cloth: ", res);
+                result(null, res);
+                return;
+            }else{
+                // 결과가 없을 시 
+                result({kind: "not_found"}, null);
+            };
+        };
+        
     });
 };
 
@@ -55,16 +57,15 @@ Cloth.findOuter = (userId, result)=>{
             console.log("error: ", err);
             result(err, null);
             return;
+        }else{
+            if(res.length){
+                console.log("found cloth: ", res);
+                result(null, res);
+                return;
+            }else result({kind: "not_found"}, null);
         }
 
-        if(res.length){
-            console.log("found cloth: ", res);
-            result(null, res);
-            return;
-        }
-
-        // 결과가 없을 시 
-        result({kind: "not_found"}, null);
+        
     });
 };
 
@@ -147,8 +148,8 @@ Cloth.getAll = result =>{
 
 // cloth id로 수정
 Cloth.updateByID = (clo_id, cloth, result)=>{
-    sql.query('UPDATE clothes SET clo_name = ?, clo_maker = ?, clo_size = ?, clo_style =?, clo_image = ?, clo_des = ?, clo_color = ? WHERE clo_id = ?', 
-    [cloth.clo_name, cloth.clo_maker, cloth.clo_size, cloth.clo_style, cloth.clo_image, cloth.clo_des, cloth.clo_color, clo_id], (err, res)=>{
+    sql.query('UPDATE clothes SET clo_name = ?, clo_maker = ?, clo_size = ?, clo_style =?, clo_image = ?, clo_des = ?, clo_color =?, clo_open =? WHERE clo_id = ?', 
+    [cloth.clo_name, cloth.clo_maker, cloth.clo_size, cloth.clo_style, cloth.clo_image, cloth.clo_des, cloth.clo_color, cloth.clo_open, clo_id], (err, res)=>{
         if(err){
             console.log("error: ", err);
             result(err, null);

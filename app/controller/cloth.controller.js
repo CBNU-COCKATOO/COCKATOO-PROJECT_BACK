@@ -17,7 +17,8 @@ exports.create = (req,res)=>{
         clo_des: req.body.clo_des,
         clo_type: req.body.clo_type,
         u_id: req.body.u_id,
-        clo_color: req.body.clo_color
+        clo_color: req.body.clo_color,
+        clo_open : req.body.clo_open
     });
 
     // 데이터베이스에 저장
