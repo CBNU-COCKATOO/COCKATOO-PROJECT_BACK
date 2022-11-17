@@ -41,7 +41,7 @@ require("./app/routes/search.routes.js")(app);
 require("./app/routes/random.routes.js")(app);
 require("./app/routes/email.routes.js")(app);
 require("./app/routes/dictionary.routes.js")(app);
-//require("./app/routes/colorget.routes")(app);
+require("./app/routes/color.routes.js")(app);
 
 // 포트넘버 설정
 app.listen(3000, ()=>{
