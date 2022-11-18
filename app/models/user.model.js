@@ -19,6 +19,9 @@ const User = function (user) {
 
 // user Ʃ�� �߰� 
 User.create = (newUser, result) => {
+    if (newUser.u_email.length ==0){
+        newUser.u_email = "https://github.com/CBNU-COCKATOO/COCKATOO-PROJECT_BACK/blob/sub_branch/happy-cockatoo.png?raw=true";
+    }
     sql.query("INSERT INTO USER SET ?", newUser, (err, res) => {
         if (err) {
             console.log("error: ", err);
