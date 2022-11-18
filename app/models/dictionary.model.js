@@ -38,7 +38,7 @@ Dict.findByID = (userId, result) => {
                 let c_image = Object.assign(res[0],res[1]);
                 console.log("검색 아이디:", userId);
                 console.log("found customer: ", res[0]);
-                result({kind:"found"}, c_image);
+                result({kind:"found"}, res);
                 return;
             }else{
                 result({ kind: "not_found" }, null);
