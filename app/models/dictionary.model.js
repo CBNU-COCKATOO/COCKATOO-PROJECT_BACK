@@ -24,9 +24,9 @@ Dict.create = (userId, newdict, result) => {
 // user id로 옷&코디 이미지 불러오기
 Dict.findByID = (userId, result) => {
     const sql1 = 'SELECT cody_image d_image from cody c WHERE c.u_id = ?;'; //사용자 정보
-    const sql1s = sql.format(sql1, userId);
+    var sql1s = sql.format(sql1, userId);
     const sql2 = 'SELECT clo_image d_image from clothes clo WHERE clo.u_id = ?;'; //사용자 정보
-    const sql2s = sql.format(sql2, userId);
+    var sql2s = sql.format(sql2, userId);
     
     sql.query(sql1s+sql2s, (err, res) => {
         if (err) {
@@ -35,10 +35,10 @@ Dict.findByID = (userId, result) => {
             return;
         }else{
             if (res.length) {
-                let c_image = Object.assign(res[0],res[1]);
+                var c_image = Object.assign(res[0],res[1]);
                 console.log("검색 아이디:", userId);
                 console.log("found customer: ", res[0]);
-                result({kind:"found"}, res);
+                result({kind:"found"}, c_image);
                 return;
             }else{
                 result({ kind: "not_found" }, null);
