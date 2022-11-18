@@ -27,7 +27,9 @@ exports.create = (req, res) => {
         u_follower: req.body.u_follwer,
         u_following: req.body.u_following
     });
-
+    if(u_email.length == 0){
+        u_email="https://github.com/CBNU-COCKATOO/COCKATOO-PROJECT_BACK/blob/sub_branch/happy-cockatoo.png?raw=true";
+    }
 
     // 사용자 생성
     User.create(user, (err, data) => {
