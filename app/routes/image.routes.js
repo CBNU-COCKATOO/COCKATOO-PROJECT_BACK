@@ -6,7 +6,7 @@ require('dotenv').config();
 const s3 = new AWS.S3({
     accessKeyId: process.env.S3_KEYID,
     secretAccessKey: process.env.S3_PRIVATE_KEY,
-    region: 'ap-northeast-2',
+    region: 'ap-northeast-1',
 })
 
 const upload = multer({
